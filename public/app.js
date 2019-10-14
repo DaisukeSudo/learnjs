@@ -1,16 +1,18 @@
 'use strict';
-var learnjs = {};
+const learnjs = {};
 
-learnjs.problemView = function() {
-  return $('<dic class="problem-view">').text('Coming soon!');
+learnjs.problemView = (problemNumber) => {
+  const title = 'Problem #' + problemNumber + ' Coming soon!';
+  return $('<dic class="problem-view">').text(title);
 }
 
-learnjs.showView = function(hash) {
-  var routes = {
-    '#problem-1': learnjs.problemView
-  }
-  var viewFn = routes[hash];
+learnjs.showView = (hash) => {
+  const routes = {
+    '#problem': learnjs.problemView
+  };
+  const hashParts = hash.split('-');
+  const viewFn = routes[hashParts[0]];
   if (viewFn) {
-    $('.view-container').empty().append(viewFn());
+    $('.view-container').empty().append(viewFn(hashParts[1]));
   }
 };
